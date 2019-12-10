@@ -182,7 +182,7 @@ startService(intent);
  
 >1) 增加setForceDisableAudioProcess接口，设置是否强制关闭软件音频信号前处理，声卡内录模式播放音乐的场景中，戴耳机的情况下可以强制关闭，提高音乐质量
 >2) 增加setChannelAudioMode接口，可设置普通通话（CHANNEL_AUDIO_MODE_CALL）和高音质通话模式（CHANNEL_AUDIO_MODE_HQ_MUSIC）
- 
+
 另外需要注意几个问题：
 >1) 房间主持人的角色设置为YOUME_USER_HOST，只有他发的语音包才有高音质的效果（因为要播放音乐，需要更高的码率支持）；其它连麦者不需要太高的码率，角色设置为YOUME_USER_TALKER_FREE；不能上麦的角色设置为YOUME_USER_LISTENER即可
 >2) 切换高音质时需要房间主持人触发，调用setChannelAudioMode，传CHANNEL_AUDIO_MODE_HQ_MUSIC，同时app层可以使用sendMessage接口发送信令，房间内其它人收到信令之后也调用setChannelAudioMode，传CHANNEL_AUDIO_MODE_HQ_MUSIC即可

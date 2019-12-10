@@ -62,14 +62,14 @@
 1. 状态管理方面的建议【2.4.x版本】
 >首先需要初始化，并且在收到初始化成功的回调后才能使用其它接口。
 >其次在房间状态方面：
->1）可包含当前房间ID（roomID)，下个房间ID（nextRoomID,初始值为空）,房间状态status（不在房间leaved，正在加入房间joining，在房间joined，正在离开房间leaving，初始值为不在房间leaved）；
->2）每次调用joinConference的时候做个判断，只有status = leaved的时候能直接调用joinConference（这个时候status更新为joining），否则这个joinConference函数会本地返回失败，不会触发回调(status值不变)
->3）joinConference成功会触发回调，收到回调值YOUME_CALL_CONNECTED的时候，表明加入房间成功，如果status!=leaving，将status值更新为joined，否则status不变（status==leaving的时候说明已经用了离开房间
+>1) 可包含当前房间ID（roomID)，下个房间ID（nextRoomID,初始值为空）,房间状态status（不在房间leaved，正在加入房间joining，在房间joined，正在离开房间leaving，初始值为不在房间leaved）;
+>2) 每次调用joinConference的时候做个判断，只有status = leaved的时候能直接调用joinConference（这个时候status更新为joining），否则这个joinConference函数会本地返回失败，不会触发回调(status值不变)
+>3) joinConference成功会触发回调，收到回调值YOUME_CALL_CONNECTED的时候，表明加入房间成功，如果status!=leaving，将status值更新为joined，否则status不变（status==leaving的时候说明已经用了离开房间
 的操作，就不用管这个回调了）;如果收到回调值YOUME_CALL_FAILED,表明加入房间失败，如果status!=leaving，将status值更新为leaved，否则status不变（status==leaving的时候说明已经用了离开房间的操作，就不用管这个回调了）;
->4）leaveConference这个接口可以随时调用，只要判断status!=leaving，就会本地返回成功并触发回调，这个时候应该把status更新为leaving; 收到回调值YOUME_CALL_TERMINATED的时候，status更新为leaved，判断下nextRoomID
+>4) leaveConference这个接口可以随时调用，只要判断status!=leaving，就会本地返回成功并触发回调，这个时候应该把status更新为leaving; 收到回调值YOUME_CALL_TERMINATED的时候，status更新为leaved，判断下nextRoomID
 是否为空，空的话不用操作别的了，非空的话说明之前有想直接切换房间的动作，这个时候再joinConference(nextRoomID)就好。
->5）想直接切换房间（从a房间到b房间），需要将nextRoomID更新为b,再手动调用离开a房间。
->6）status的不同状态可以展现不同的ui，可以体验北凉从主播频道切换到指挥频道的时候，ui上其实会动态显示（退出中－－－>进入中－－－>指挥）。退出中对应status的leaving，进入中对应joining,指挥则是joined
+>5) 想直接切换房间（从a房间到b房间），需要将nextRoomID更新为b,再手动调用离开a房间。
+>6) status的不同状态可以展现不同的ui，可以体验北凉从主播频道切换到指挥频道的时候，ui上其实会动态显示（退出中－－－>进入中－－－>指挥）。退出中对应status的leaving，进入中对应joining,指挥则是joined
 
 2. YOUME_EVENT_OTHERS_VOICE_OFFYOUME_EVENT_OTHERS_VOICE_OFF joinConference、init之类的接口没进入到回调怎么回事？
 >查看该接口函数的直接返回值，只有为YOUME_SUCCESS的时候才会进入回调。返回值为YOUME_ERROR_WRONG_STATE时表明状态错误，一般是此时初始化还没成功或者进出房间操作还没完成所致。

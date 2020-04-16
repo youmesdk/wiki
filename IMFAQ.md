@@ -261,6 +261,10 @@
 23.  发送消息收到 UnknowError 错误
     
    > 常见于发送房间消息，房间号并不存在。修正的方法是往自己joinRoom的房间id发消息，就可以发送成功。
+   
+24.  joinChannelSingleMode调用该接口，如果退出频道加入另一个频道时需要等待退出成功的回调后再调用joinChannelSingleMode吗？
+
+   > 不需要，可以连续调用，joinChannelSingleMode单频道模式会自动退出上一个频道。
     
 ## LBS相关问题
 

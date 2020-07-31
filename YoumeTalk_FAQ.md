@@ -205,6 +205,15 @@ startService(intent);
 33. 如果已经加入了语音频道，还能加入IM的聊天频道么？能收听和发送聊天频道的语音消息吗？
 >语音频道和IM聊天消息频道对应游密的两个SDK，因此，是没有任何冲突的。您可以在加入语音频道的同时，加入多个IM聊天频道。在这种情况下，收听聊天频道的语音消息是不受任何影响的，但是，录入语音消息要看具体情况，如果在语音频道中已经占用了麦克风设备（比如：自由通话模式，和主播／指挥模式下的主播／指挥），那么就不允许在IM聊天频道中录入语音消息
 
+34. Talk 的使用cocos_lua的SDK，因为游戏原本使用fmod来播放游戏背景音乐，在接入SDK后，iOS端在连接蓝牙耳机时，打开麦克风SetMicrophoneMute（false）时，游戏背景音乐就会消失？
+>给fmod加上buff设置就可以了，代码添加到 p_system->init 之前，可以加上宏判断下，只有iOS 才调整：
+ ```
+ unsigned int bufferlength = 0;
+int numbuffers =0;
+p_system->getDSPBufferSize (&bufferlength, &numbuffers);
+p_system->setDSPBufferSize (bufferlength, numbuffers * 2);
+```
+
 ## 其他问题
 
 1. 有人声检测的接口吗，比如A用户说了话，可以识别到，并返回到B用户？

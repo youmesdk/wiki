@@ -17,6 +17,10 @@
 4.  我们的游戏在海外运营，游密IMSDK能提供海外服务吗？
 
     > 游密IM SDK目前已经在美国、香港、日本、韩国、法国、爱尔兰、俄罗斯、澳大利亚、新加坡、印度、巴西等地区部署服务器，满足游戏厂商海外运营的需求。如果需要定制化部署服务，也可与商务沟通。
+    
+5.  在接入iOS的时候编译出错：AliyunNlsSdk' for architecture arm64  clang: error: linker command failed with exit code 1 (use -v to see invocation)
+    
+    > 检查一下库是否都导入完全，确保需要导入的相关库文件已经添加完全，如果都导入了还报错，可以在build settings里搜索bitcode，然后关闭
 
 ## AppKey问题
 

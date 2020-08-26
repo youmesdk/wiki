@@ -232,3 +232,6 @@ p_system->setDSPBufferSize (bufferlength, numbuffers * 2);
 
 5. 如果因为某些原因，多次调用加入同一频道的操作（或离开频道等类似情况），而没有退出，会怎样？
 >虽然SDK会让你后面的不合理的函数（重复加入频道等）操作直接返回失败，但游戏方应该做好状态管理，去积极避免这种情况发生。
+
+6. Talk ios出现崩溃：void youmecommon::protobuf::internal::arena_delete_object xxx是什么原因？
+>这个崩溃日志是因为没有上传符号文件解析错误的，需要重新上传一下dsym符号文件到bugly，然后再确认一下收集到的崩溃日志。

@@ -214,6 +214,10 @@ p_system->getDSPBufferSize (&bufferlength, &numbuffers);
 p_system->setDSPBufferSize (bufferlength, numbuffers * 2);
 ```
 
+35. 初始化后如果没调用反初始化，而再一次调用初始化接口是否可以，会报什么错呢？
+>会报-7 状态错误，一般只需要调用一次初始化就行；
+
+
 ## 其他问题
 
 1. 有人声检测的接口吗，比如A用户说了话，可以识别到，并返回到B用户？

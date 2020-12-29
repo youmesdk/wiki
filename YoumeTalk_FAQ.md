@@ -217,6 +217,8 @@ p_system->setDSPBufferSize (bufferlength, numbuffers * 2);
 35. 初始化后如果没调用反初始化，而再一次调用初始化接口是否可以，会报什么错呢？
 >会报-7 状态错误，一般只需要调用一次初始化就行；
 
+36. 多频道的模式下，两个频道的切换逻辑是怎样的呢？如果我先以freeTalker身份加入一个房间，后面再加入一个房间freeTalk身份，我是只能在第二个房间讲话吗？那我在一个房间是listener,加入一个房间（以listener）， 后续在setRole（freetalker）,那我是只能加第二个房间讲话？
+> JoinChannelMultiMode多频道模式下，如果加入多个语音频道，一开始默认说话通道是走的第一个频道，可以通过SpeakerToChannel来切换指定当前说话的频道，如果加入来多个频道，setRole(role)该设置身份接口会改变的是多个频道下的身份，同时只有在主播或者自由说话者的身份才能说话，listenner身份只能听不能说；
 
 ## 其他问题
 

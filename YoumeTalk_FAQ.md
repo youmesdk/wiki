@@ -169,23 +169,6 @@ startService(intent);
 >4) setMicrophoneMute和setSpeakerMute接口的调用和UI显示保持同步。
 >5) 运行期间初始化和反初始化应该只做一次，中间可以反复进出频道。
 
-setWhiteuserList 设置白名单用户
-> 语法
-```
-YouMeErrorCode setWhiteUserList (const char* strChannelID, const char* strWhiteUserList);
-```
-· 功能：设置当前用户的语音消息接收白名单，其语音消息只会转发到白名单的用户，不设置该接口则默认转发至频道内所有人。
-
-· 参数说明：`strChannelID`：要设置的频道(兼容多频道模式，单频道模式下传入当前频道即可)。 strWhiteUserList：白名单用户列表, 以|分隔，如：User1|User2|User3；表示语音消息只发送到User1,User2,User3. "all"表示转发至频道内所有人；""（空字符串）表示不转发至任何用户。
-
-· 返回值 返回YOUME_SUCCESS才会有异步回调通知。其它返回值请参考YouMeErrorCode类型定义。
-· 异步回调
-```
-//涉及到的主要回调事件有：
-//YOUME_EVENT_SET_WHITE_USER_LIST_OK - 成功在指定语音频道设置白名单，有异常用户会返回错误码YOUME_ERROR_WHITE_SOMEUSER_ABNORMAL
-//YOUME_EVENT_SET_WHITE_USER_LIST_FAILED - 在指定语音频道设置白名单失败，可能原因是网络或服务器有问题
-void onEvent(const YouMeEvent event, const YouMeErrorCode error, const char * channel, const char * param) ;
-```
 
 25. Android播放背景音乐接口返回失败
 >1) 检查一下mp3文件是否存在

@@ -165,7 +165,7 @@ startService(intent);
 24. 吃鸡类游戏接口调用建议
 >1) 在YOUME_EVENT_INIT_OK事件后，建议先调用setReleaseMicWhenMute（关闭麦克风时保持原有游戏的高音质），再调用加入房间joinChannelSingleMode接口，其中YouMeUserRole为YOUME_USER_TALKER_FREE，bCheckRoomExist为false；
 >2) 在加入房间成功事件YOUME_EVENT_JOIN_OK之后，立即调用setWhiteUserList（必须）、setMicrophoneMute：true（默认关闭麦克风，强烈建议）、setSpeakerMute：false（默认打开扬声器）、setAutoSendStatus（不建议）、setVadCallbackEnable（可选）、setMicLevelCallback（可选）、setVolume（可选）。
->3) 特别说明：setWhiteUserList接口是指将自己的语音只转发给白名单列表里的玩家，其它人收不到。其WhiteUserList参数建议写成小队成员+距离最近的敌人的形式，小队成员一定要排在前面，如果没有队友，可以只列出距离最近的敌人。一定要在加入房间成功之后立即调setWhiteUserList，否则会造成房间内100人同时说话的情况（默认开麦时）。白名单的最大长度游戏应该控制一下，我们在后台也可以做限制，建议不大于5个。
+>3) 特别说明：setWhiteUserList接口是指将自己的语音只转发给白名单列表里的玩家，其它人收不到。其WhiteUserList参数建议写成小队成员+距离最近的敌人的形式，小队成员一定要排在前面，如果没有队友，可以只列出距离最近的敌人。一定要在加入房间成功之后立即调setWhiteUserList，否则会造成房间内20人同时说话的情况（默认开麦时）。白名单的最大长度游戏应该控制一下，我们在后台也可以做限制，建议不大于5个。
 >4) setMicrophoneMute和setSpeakerMute接口的调用和UI显示保持同步。
 >5) 运行期间初始化和反初始化应该只做一次，中间可以反复进出频道。
 
